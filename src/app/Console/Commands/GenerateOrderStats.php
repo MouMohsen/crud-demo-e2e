@@ -28,6 +28,7 @@ class GenerateOrderStats extends Command
     public function handle()
     {
         $src = $this->argument('src');
+        $fileName = str_replace(".csv", "", $src);
         
         $orders = [];
         if (($open = fopen(base_path(). "/$src", "r")) !== FALSE) {
@@ -64,8 +65,8 @@ class GenerateOrderStats extends Command
 
         }
 
-        file_put_contents("./0_order_log00.csv", $averageFileContent);
-        file_put_contents("./1_order_log00.csv", $popularFileContent);
+        file_put_contents("./0_$fileName.csv", $averageFileContent);
+        file_put_contents("./1_$fileName.csv", $popularFileContent);
 
         echo "Files Generated";
     }
