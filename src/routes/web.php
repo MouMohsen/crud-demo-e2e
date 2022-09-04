@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrdersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [OrdersController::class, 'index'])->name('home');
+Route::post('/orders/delete', [OrdersController::class, 'destroy']);
+Route::get('/orders/edit/{orderId}', [OrdersController::class, 'edit']);
+Route::post('/orders/update/{orderId}', [OrdersController::class, 'update']);
+Route::get('/orders/create', [OrdersController::class, 'create']);
+Route::post('/orders/store', [OrdersController::class, 'store']);
+Route::get('/orders/seed', [OrdersController::class, 'seed']);
